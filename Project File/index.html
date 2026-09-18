@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarhead Lab Task Hub — Sign In</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <h1>Jarhead Lab Task Hub</h1>
+    <p class="subtitle">Sign in or create an account</p>
+
+    <div class="auth-tabs">
+      <button class="tab active" data-tab="signin" type="button">Sign In</button>
+      <button class="tab"        data-tab="signup" type="button">Sign Up</button>
+    </div>
+
+    <!-- Sign In -->
+    <form id="signinForm" class="auth-form">
+      <label>
+        Email
+        <input id="signinEmail" type="email" required autocomplete="email" />
+      </label>
+      <label>
+        Password
+        <input id="signinPassword" type="password" required autocomplete="current-password" />
+      </label>
+      <button type="submit">Sign In</button>
+      <p class="forgot-link">
+        <a href="#" id="forgotPasswordLink">Forgot password?</a>
+      </p>
+    </form>
+
+    <!-- Forgot password -->
+    <form id="forgotForm" class="auth-form hidden">
+      <label>
+        Email
+        <input id="forgotEmail" type="email" required autocomplete="email" />
+      </label>
+      <button type="submit">Send Reset Link</button>
+      <p class="forgot-link">
+        <a href="#" id="backToSigninLink">Back to sign in</a>
+      </p>
+    </form>
+
+    <!-- Sign Up -->
+    <form id="signupForm" class="auth-form hidden">
+      <label>
+        Role
+        <select id="signupRole" required>
+          <option value="">Select role…</option>
+          <option value="client">Client</option>
+          <option value="va">Virtual Assistant</option>
+        </select>
+      </label>
+      <label>
+        Display name
+        <input id="signupName" type="text" required placeholder="e.g. Jane Doe" />
+      </label>
+      <label>
+        Email
+        <input id="signupEmail" type="email" required autocomplete="email" />
+      </label>
+      <label>
+        Password
+        <input id="signupPassword" type="password" required minlength="6" autocomplete="new-password" />
+      </label>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <p id="authMessage" class="auth-message hidden"></p>
+    <p class="hint">Need help? See SETUP.md for the one-time Supabase setup.</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarhead Lab Task Hub — Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-page">
+  <header class="topbar">
+    <div class="brand">Jarhead Lab Task Hub</div>
+    <div class="user-info">
+      <span id="userBadge"></span>
+      <button id="settingsBtn" class="ghost">Settings</button>
+      <button id="logoutBtn" class="ghost">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section id="createTaskSection" class="panel">
+      <h2>Assign a new task</h2>
+      <form id="taskForm" class="task-form-grid">
+        <label>
+          Title
+          <input id="taskTitle" type="text" required placeholder="What needs to be done?" />
+        </label>
+        <label>
+          Assign to (VA)
+          <select id="taskAssignee" required>
+            <option value="">Select a VA…</option>
+          </select>
+        </label>
+        <label>
+          Client / Project
+          <div class="project-picker" id="projectPicker">
+            <button type="button" class="project-picker-trigger" id="projectPickerTrigger">
+              <span id="projectPickerLabel" class="project-picker-placeholder">Select Project / Client…</span>
+              <span class="project-picker-caret">▾</span>
+            </button>
+            <div class="project-picker-menu hidden" id="projectPickerMenu">
+              <div class="project-list" id="projectList"></div>
+              <div class="project-create">
+                <button type="button" class="project-create-toggle" id="projectCreateToggle">
+                  <span class="plus-icon">+</span> Create new Project
+                </button>
+                <div class="project-create-form hidden" id="projectCreateForm">
+                  <input type="text" id="newProjectName" placeholder="Project name" />
+                  <button type="button" id="newProjectSubmit">Add</button>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="taskProjectId" />
+          </div>
+        </label>
+        <label>
+          Due date
+          <input id="taskDue" type="date" required />
+        </label>
+        <label class="full-row">
+          Notes
+          <textarea id="taskNotes" rows="2" placeholder="Optional details"></textarea>
+        </label>
+        <div class="full-row">
+          <button type="submit">Assign Task</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2 id="tasksHeading">Tasks</h2>
+        <div class="filters">
+          <select id="filterStatus">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+      </div>
+      <div id="tasksList" class="tasks-list"></div>
+    </section>
+  </main>
+
+  <!-- Settings modal -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-card">
+      <h2>Notification Settings</h2>
+      <label>
+        Discord webhook URL
+        <input id="discordWebhook" type="url" placeholder="https://discord.com/api/webhooks/…" />
+      </label>
+      <p class="hint">
+        Create a webhook in your Discord server: Server Settings → Integrations → Webhooks → New Webhook → Copy URL.
+      </p>
+      <label>
+        Gmail notification email (coming soon)
+        <input id="gmailAddr" type="email" placeholder="you@gmail.com" disabled />
+      </label>
+      <p class="hint">Gmail sending will be added via a Supabase Edge Function in the next step.</p>
+      <div class="modal-actions">
+        <button id="testWebhookBtn" class="ghost">Send test</button>
+        <button id="saveSettingsBtn">Save</button>
+        <button id="closeSettingsBtn" class="ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
